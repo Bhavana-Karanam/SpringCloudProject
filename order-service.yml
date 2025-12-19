@@ -23,7 +23,7 @@ order:
 resilience4j:
   circuitbreaker:
     instances:
-      coffee-service:
+      coffeeBreaker:
         slidingWindowSize: 5
         minimumNumberOfCalls: 1
         failureRateThreshold: 50
@@ -39,6 +39,7 @@ management:
       enabled: true
     circuitbreakerevents:
       enabled: true
+
 
 
 
