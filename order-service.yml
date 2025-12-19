@@ -5,8 +5,9 @@ spring:
   application:
     name: order-service
   cloud:
-    config:
-      enabled: false
+    openfeign:
+     circuitbreaker:
+       enabled: true
 
 eureka:
   client:
@@ -38,3 +39,4 @@ management:
       enabled: true
     circuitbreakerevents:
       enabled: true
+
