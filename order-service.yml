@@ -18,18 +18,23 @@ eureka:
 order:
   defaultMessage: "Your order is being processed!"
 
-feign:
+
+resilience4j:
   circuitbreaker:
-    enabled: true
+    instances:
+      coffeeBreaker:
+        slidingWindowSize: 5
+        minimumNumberOfCalls: 1
+        failureRateThreshold: 50
+        waitDurationInOpenState: 10s
 
-resilience4j.circuitbreaker:
-  instances:
-    coffeeService:
-      registerHealthIndicator: true
-      slidingWindowSize: 10
-      minimumNumberOfCalls: 3 # Trips after only 3 attempts
-      failureRateThreshold: 50
-      waitDurationInOpenState: 10s
-      permittedNumberOfCallsInHalfOpenState: 3
-
-
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,circuitbreakers,circuitbreakerevents
+  endpoint:
+    circuitbreakers:
+      enabled: true
+    circuitbreakerevents:
+      enabled: true
